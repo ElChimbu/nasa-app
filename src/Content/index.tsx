@@ -24,10 +24,7 @@ export default function Content({ name }: ContentProps) {
     res && setItems(arr)
     res.length === 0 && setFinished(true)
   }
-  console.log(items)
-
   const filteredArr = uniqBy(items, 'id')
-  console.log(filteredArr)
 
   React.useEffect(() => {
     fetch()
