@@ -5,12 +5,10 @@ export default function LoadingView() {
   return (
     <>
       <SkeletonLoading />
-      <SkeletonLoading />
-      <SkeletonLoading />
-      <SkeletonLoading />
-      <SkeletonLoading />
-      <SkeletonLoading />
-      <SkeletonLoading />
+      <div className="hidden lg:contents">
+        <SkeletonLoading />
+        <SkeletonLoading />
+      </div>
     </>
   )
 }
