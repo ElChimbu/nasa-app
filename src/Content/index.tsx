@@ -1,11 +1,10 @@
 /* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import Error from '../Pages/Error'
 import getRover from '../Services/nasa-service'
 import Card from './Card/index'
 import LoadingView from './LoadingView'
-import UniqBy from 'lodash'
+import uniqBy from 'lodash/uniqBy'
 
 type ContentProps = {
   name: string
@@ -21,9 +20,15 @@ export default function Content({ name }: ContentProps) {
       name,
       page: currentPage > 1 ? currentPage : 1,
     })
-    res && setItems([...res, ...items])
+    const arr = [...res, ...items]
+    res && setItems(arr)
     res.length === 0 && setFinished(true)
   }
+  console.log(items)
+
+  const filteredArr = uniqBy(items, 'id')
+  console.log(filteredArr)
+
   React.useEffect(() => {
     fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,7 +47,7 @@ export default function Content({ name }: ContentProps) {
           loader={<LoadingView />}
           className="p-10 flex flex-row flex-wrap justify-center"
         >
-          {items?.map((_: any) => (
+          {filteredArr?.map((_: any) => (
             <Card
               id={_.id}
               img={_.img_src}
