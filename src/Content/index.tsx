@@ -1,24 +1,24 @@
 /* eslint-disable react/jsx-boolean-value */
 import React, { ReactElement } from 'react'
+import Error from '../Pages/Error'
 import Card from './Card/index'
-import SkeletonLoading from './Card/SkeletonLoading'
+import LoadingView from './LoadingView'
 
 type ContentProps = {
   items: any
+  pag: number
 }
 
-export default function Content({ items }: ContentProps): ReactElement {
+export default function Content({ items, pag }: ContentProps): ReactElement {
+  const Items =
+    items?.data?.photos?.length === undefined ||
+    items?.data?.photos?.length === 0
+  if (Items && pag > 0) return <Error />
   return (
-    <main className="p-10 bg-gray-100 flex flex-row flex-wrap justify-center">
-      {items?.data?.photos?.length === undefined ? (
+    <main className="p-10 flex flex-row flex-wrap justify-center">
+      {Items ? (
         <>
-          <SkeletonLoading />
-          <SkeletonLoading />
-          <SkeletonLoading />
-          <SkeletonLoading />
-          <SkeletonLoading />
-          <SkeletonLoading />
-          <SkeletonLoading />
+          <LoadingView />
         </>
       ) : (
         items.data.photos?.map((_: any) => (

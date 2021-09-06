@@ -1,32 +1,39 @@
 import classNames from 'classnames'
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 interface IParams {
   name: string
   pag: string
 }
 
-export default function Pagination() {
-  const { name, pag } = useParams<IParams>()
-  const optionalName = name ? name : 'curiosity'
-  const actualPag = pag ? parseInt(pag) : 0
+type PaginationProps = {
+  name: string
+  pag: number
+  disabled: boolean
+}
+
+export default function Pagination({ name, pag, disabled }: PaginationProps) {
+  if (!disabled) {
+    return null
+  }
   return (
-    <div className="flex flex-shrink-0 select-none bg-gray-400 flex-row w-ful justify-center items-center text-lg h-10 font-bold">
-      {actualPag !== 0 ||
-        (isNaN(actualPag) && (
+    <div className="sticky bottom-0 w-full flex flex-shrink-0 select-none bg-gray-400 flex-row w-ful justify-center items-center text-lg h-10 font-bold">
+      {pag !== 1 && (
+        <Link to={`/rovers/${name}/${pag - 1}`}>
           <div
             className={classNames('mr-3 hover:text-blue-500 cursor-pointer')}
           >
-            <a href={`/rovers/${optionalName}/${actualPag - 1}`}> PREV </a>
+            PREV
           </div>
-        ))}
+        </Link>
+      )}
       <div>
-        <p>{isNaN(actualPag) ? 0 : actualPag}</p>
+        <p>{pag}</p>
       </div>
-      <div className="ml-3 hover:text-blue-500 cursor-pointer">
-        <a href={`/rovers/${optionalName}/${actualPag + 1}`}> NEXT </a>
-      </div>
+      <Link to={`/rovers/${name}/${pag + 1}`}>
+        <div className="ml-3 hover:text-blue-500 cursor-pointer">NEXT</div>
+      </Link>
     </div>
   )
 }

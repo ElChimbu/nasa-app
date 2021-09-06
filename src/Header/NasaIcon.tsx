@@ -5,8 +5,8 @@ export default function NasaIcon() {
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
-      width="84"
-      height="84"
+      width="auto"
+      height="auto"
       viewBox="0 0 256.000000 256.000000"
       preserveAspectRatio="xMidYMid meet"
     >

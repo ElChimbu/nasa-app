@@ -9,8 +9,11 @@ interface IParams {
   pag: string
 }
 export default function Home(): ReactElement {
-  const [items, setItems] = React.useState([])
-  const { name, pag } = useParams<IParams>()
+  const [items, setItems] = React.useState<any>([])
+  const { name = 'curiosity', pag } = useParams<IParams>()
+  const actualPag = pag ? parseInt(pag) : 1
+  const disabled = items?.data?.photos?.length
+
   const fetch = async () => {
     const res = await getRover({ name, page: pag })
     setItems(res)
@@ -21,8 +24,8 @@ export default function Home(): ReactElement {
   return (
     <>
       <Header />
-      <Content items={items} />
-      <Pagination />
+      <Content items={items} pag={actualPag} />
+      <Pagination name={name} pag={actualPag} disabled={disabled} />
     </>
   )
 }

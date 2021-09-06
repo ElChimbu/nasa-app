@@ -33,7 +33,7 @@ export default function Card({
   return (
     <div className="m-4 w-64 shadow-lg h-full rounded-sm">
       <div className="cursor-pointerh-64 w-64">
-        <img className="w-[255px] h-[255px]" src={img} alt={roverName} />
+        <img className=" w-64 h-64" src={img} alt={roverName} />
       </div>
       <div className="text-center flex flex-col items-center">
         <h1 className="text-xl font-bold">{roverName}</h1>
