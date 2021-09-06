@@ -18,7 +18,7 @@ function Header(): ReactElement {
         </div>
       </Link>
       <nav className="flex flex-row list-none select-none">
-        <Link to={'/rovers/curiosity/1'}>
+        <Link to={'/rovers/1/curiosity'}>
           <li
             className={classNames(
               'border-0 border-b-4 mr-3 hover:bg-gray-200 cursor-pointer p-2',
@@ -29,7 +29,7 @@ function Header(): ReactElement {
           </li>
         </Link>
 
-        <Link to={`/rovers/opportunity/1`}>
+        <Link to={`/rovers/2/opportunity`}>
           <li
             className={classNames(
               'border-0 border-b-4 mr-3 hover:bg-gray-200 cursor-pointer p-2',
@@ -40,7 +40,7 @@ function Header(): ReactElement {
           </li>
         </Link>
 
-        <Link to={`/rovers/spirit/1`}>
+        <Link to={`/rovers/3/spirit`}>
           <li
             className={classNames(
               'border-0 border-b-4 mr-3 hover:bg-gray-200 cursor-pointer p-2',

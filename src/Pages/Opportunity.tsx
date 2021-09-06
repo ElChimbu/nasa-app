@@ -5,7 +5,7 @@ import Header from '../Header'
 interface IParams {
   name: string
 }
-export default function Home(): ReactElement {
+export default function Opportunitty() {
   const { name } = useParams<IParams>()
 
   return (

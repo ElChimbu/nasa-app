@@ -5,7 +5,7 @@ import Header from '../Header'
 interface IParams {
   name: string
 }
-export default function Home(): ReactElement {
+export default function Spirit() {
   const { name } = useParams<IParams>()
 
   return (

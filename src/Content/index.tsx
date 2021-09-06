@@ -5,6 +5,7 @@ import Error from '../Pages/Error'
 import getRover from '../Services/nasa-service'
 import Card from './Card/index'
 import LoadingView from './LoadingView'
+import UniqBy from 'lodash'
 
 type ContentProps = {
   name: string
@@ -20,8 +21,8 @@ export default function Content({ name }: ContentProps) {
       name,
       page: currentPage > 1 ? currentPage : 1,
     })
-    if (res) setItems([...res, ...items])
-    if (res.length === 0) setFinished(true)
+    res && setItems([...res, ...items])
+    res.length === 0 && setFinished(true)
   }
   React.useEffect(() => {
     fetch()
