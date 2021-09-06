@@ -1,6 +1,4 @@
 import axios from 'axios'
-import { Console } from 'console'
-
 const { REACT_APP_KEY } = process.env
 const currentDate = '2020-09-22'
 const currentSol = 2890

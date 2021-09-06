@@ -1,9 +1,7 @@
-import classNames from 'classnames'
 import React from 'react'
 import Dates from './Dates'
 
 type CardProps = {
-  id: string
   img: string
   roverName: string
   earthDate: string
@@ -13,7 +11,6 @@ type CardProps = {
 }
 
 export default function Card({
-  id,
   img,
   roverName,
   earthDate,
@@ -21,8 +18,6 @@ export default function Card({
   launchDate,
   camera,
 }: CardProps) {
-  const [added, setAdded] = React.useState(false)
-
   return (
     <div className="m-4 w-64 shadow-lg h-full rounded-sm">
       <div className="cursor-pointerh-64 w-64">

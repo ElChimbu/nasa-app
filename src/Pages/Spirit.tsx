@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import Content from '../Content'
 import { useParams } from 'react-router-dom'
 import Header from '../Header'

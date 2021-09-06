@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-boolean-value */
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import getRover from '../Services/nasa-service'
@@ -46,7 +45,6 @@ export default function Content({ name }: ContentProps) {
         >
           {filteredArr?.map((_: any) => (
             <Card
-              id={_.id}
               img={_.img_src}
               key={_.id}
               roverName={_.rover?.name}
