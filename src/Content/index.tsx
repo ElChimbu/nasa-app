@@ -7,6 +7,7 @@ import LoadingView from './LoadingView'
 import uniqBy from 'lodash/uniqBy'
 import ErrorPlaceholder from '../Pages/Error/ErrorPlaceholder'
 import classNames from 'classnames'
+import common from '../Wordings/common.json'
 
 type ContentProps = {
   name: string
@@ -44,6 +45,7 @@ export default function Content({ name }: ContentProps) {
   const content = search ? cameras : filteredArr
   const noCameras = search !== '' && cameras.length === 0
   const noContent = search === '' && items.length === 0
+  console.log()
 
   React.useEffect(() => {
     fetch()
@@ -61,7 +63,7 @@ export default function Content({ name }: ContentProps) {
               noContent ? ' bg-gray-300 pointer-events-none' : 'ring-1'
             )}
             disabled={noContent}
-            placeholder="Search rover camera here"
+            placeholder={common.input.search_placeholder}
           />
         </div>
         {!noCameras && noContent && finished ? (
@@ -74,7 +76,7 @@ export default function Content({ name }: ContentProps) {
               fetch()
             }}
             hasMore={!finished}
-            loader={<LoadingView />}
+            loader={noCameras ? <ErrorPlaceholder /> : <LoadingView />}
             className="flex flex-row flex-wrap justify-center"
           >
             {content?.map((_: any) => (

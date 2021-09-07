@@ -1,6 +1,9 @@
 {
   "input": {
-    "search_placeholder": "Search Here",
-    "search": "Search"
+    "search_placeholder": "Search Here"
+  },
+  "error": {
+    "title": "Oops!, something gone wrong",
+    "subtitle": "Try again, maybe the page you are looking for does not exists"
   }
 }
