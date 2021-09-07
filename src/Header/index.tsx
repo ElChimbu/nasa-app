@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Links from './tabs.json'
 
 interface IParams {
-  name: string
+  name: 'curiosity' | 'opportunity' | 'spirit'
 }
 
 function Header(): ReactElement {

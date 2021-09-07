@@ -18,11 +18,13 @@ export default function Content({ name }: ContentProps) {
   const [currentPage, setPage] = useState(1)
   const [finished, setFinished] = useState(false)
   const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState('')
 
   const fetch = async () => {
     const res = await getRover({
       name,
       page: currentPage > 1 ? currentPage : 1,
+      filter: filter,
     })
     const arr = [...res, ...items]
     res && setItems(arr)
@@ -45,17 +47,34 @@ export default function Content({ name }: ContentProps) {
   const content = search ? cameras : filteredArr
   const noCameras = search !== '' && cameras.length === 0
   const noContent = search === '' && items.length === 0
-  console.log()
 
   React.useEffect(() => {
     fetch()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name])
+  }, [name, filter])
 
   return (
     <main className="relative">
       <div className="absolute w-full p-5">
-        <div className="flex justify-center sm:justify-end sm:pr-12">
+        <div className="flex justify-center flex-wrap sm:justify-end sm:pr-12">
+          <div
+            onClick={() => setFilter('sol')}
+            className={classNames(
+              'mr-3 p-3  cursor-pointer rounded-sm',
+              filter === 'sol' ? 'bg-gray-500' : 'hover:bg-gray-300'
+            )}
+          >
+            {common.filter_tabs.sol}
+          </div>
+          <div
+            onClick={() => setFilter('earth_date')}
+            className={classNames(
+              'mr-3 p-3  cursor-pointer rounded-sm',
+              filter === 'earth_date' ? 'bg-gray-500' : 'hover:bg-gray-300'
+            )}
+          >
+            {common.filter_tabs.earth_date}
+          </div>
           <input
             onChange={handleOnChange}
             className={classNames(

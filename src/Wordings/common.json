@@ -4,6 +4,10 @@
   },
   "error": {
     "title": "Oops!, something gone wrong",
-    "subtitle": "Try again, maybe the page you are looking for does not exists"
+    "subtitle": "Try again, maybe the date you are looking for does not exists"
+  },
+  "filter_tabs": {
+    "earth_date": "Search by earth date",
+    "sol": "Search by sol"
   }
 }
