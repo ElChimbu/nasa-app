@@ -9,7 +9,8 @@ type getRoverProps = {
 }
 
 const getRover = ({ name = 'curiosity', page = 1 }: getRoverProps) => {
-  const URI = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=${currentDate}&sol=${currentSol}&page=${page}&api_key=${REACT_APP_KEY}`
+  const URI = `https://api.nasa.gov/mars-photos/api/v1/rovers/${name}/photos?earth_date=7-09-2021&sol=${currentSol}&total_photos&page=${page}&api_key=${REACT_APP_KEY}`
+  console.log(URI)
   return axios
     .get(URI)
     .then((res) => res?.data?.photos)
