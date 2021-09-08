@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
-import Content from '../Content'
+import Content from '../Components/Content'
 import { useParams } from 'react-router-dom'
-import Header from '../Header'
+import Header from '../Components/Header'
 interface IParams {
   name: string
 }

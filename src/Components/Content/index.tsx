@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import getRover from '../Services/nasa-service'
+import getRover from '../../Services/nasa-service'
 import Card from './Card/index'
 import LoadingView from './LoadingView'
 import uniqBy from 'lodash/uniqBy'
-import ErrorPlaceholder from '../Pages/Error/ErrorPlaceholder'
+import ErrorPlaceholder from '../../Pages/Error/ErrorPlaceholder'
 import classNames from 'classnames'
-import common from '../Wordings/common.json'
+import common from '../../Wordings/common.json'
 import tabs from './tabs.json'
 
 type ContentProps = {
