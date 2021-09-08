@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import getRover from '../Services/nasa-service'
@@ -8,6 +8,7 @@ import uniqBy from 'lodash/uniqBy'
 import ErrorPlaceholder from '../Pages/Error/ErrorPlaceholder'
 import classNames from 'classnames'
 import common from '../Wordings/common.json'
+import tabs from './tabs.json'
 
 type ContentProps = {
   name: string
@@ -19,6 +20,19 @@ export default function Content({ name }: ContentProps) {
   const [finished, setFinished] = useState(false)
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('')
+  const filteredArr = uniqBy(items, 'id')
+
+  function handleOnChange(e: any) {
+    const value = e.target.value
+    setSearch(value)
+  }
+  const cameras = filteredArr.filter(
+    (_: any) =>
+      _.camera?.full_name
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase()) ||
+      _.camera?.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+  )
 
   const fetch = async () => {
     const res = await getRover({
@@ -27,26 +41,13 @@ export default function Content({ name }: ContentProps) {
       filter: filter,
     })
     const arr = [...res, ...items]
-    res && setItems(arr)
-    res.length === 0 && setFinished(true)
+    res.length === 0 ? setFinished(true) : setItems(arr)
   }
-
-  const filteredArr = uniqBy(items, 'id')
-  function handleOnChange(e: any) {
-    const value = e.target.value
-    setSearch(value)
-  }
-
-  const cameras = filteredArr.filter(
-    (_: any) =>
-      _.camera?.full_name
-        .toLocaleLowerCase()
-        .includes(search.toLocaleLowerCase()) ||
-      _.camera?.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-  )
   const content = search ? cameras : filteredArr
   const noCameras = search !== '' && cameras.length === 0
+  const searchNotFound = search !== '' && items.length === 0
   const noContent = search === '' && items.length === 0
+  console.log(noContent)
 
   React.useEffect(() => {
     fetch()
@@ -56,36 +57,36 @@ export default function Content({ name }: ContentProps) {
   return (
     <main className="relative">
       <div className="absolute w-full p-5">
-        <div className="flex justify-center flex-wrap sm:justify-end sm:pr-12">
-          <div
-            onClick={() => setFilter('sol')}
-            className={classNames(
-              'mr-3 p-3  cursor-pointer rounded-sm',
-              filter === 'sol' ? 'bg-gray-500' : 'hover:bg-gray-300'
-            )}
-          >
-            {common.filter_tabs.sol}
-          </div>
-          <div
-            onClick={() => setFilter('earth_date')}
-            className={classNames(
-              'mr-3 p-3  cursor-pointer rounded-sm',
-              filter === 'earth_date' ? 'bg-gray-500' : 'hover:bg-gray-300'
-            )}
-          >
-            {common.filter_tabs.earth_date}
+        <div className="flex justify-center items-center flex-wrap sm:justify-end sm:pr-12">
+          <div className="flex items-center">
+            {tabs.map((_, i) => (
+              <div
+                key={i}
+                onClick={() => {
+                  setFilter(_.name), setPage(1), setItems([])
+                }}
+                className={classNames(
+                  'm-3 p-3  cursor-pointer rounded-sm text-sm',
+                  filter === _.name
+                    ? 'bg-gray-700 text-white'
+                    : 'hover:bg-gray-300'
+                )}
+              >
+                {_.title}
+              </div>
+            ))}
           </div>
           <input
             onChange={handleOnChange}
             className={classNames(
-              'rounded-sm p-3 w-60',
+              'rounded-sm ml-3 p-3 w-60 h-12',
               noContent ? ' bg-gray-300 pointer-events-none' : 'ring-1'
             )}
             disabled={noContent}
             placeholder={common.input.search_placeholder}
           />
         </div>
-        {!noCameras && noContent && finished ? (
+        {(!noCameras && noContent && finished) || searchNotFound ? (
           <ErrorPlaceholder />
         ) : (
           <InfiniteScroll
