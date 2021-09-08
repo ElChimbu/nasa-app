@@ -46,7 +46,6 @@ export default function Content({ name }: ContentProps) {
   const content = search ? cameras : filteredArr
   const noCameras = search !== '' && cameras.length === 0
   const noContent = search === '' && items.length === 0
-  console.log(!noCameras && noContent && finished)
 
   React.useEffect(() => {
     fetch()
