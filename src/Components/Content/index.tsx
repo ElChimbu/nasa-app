@@ -45,9 +45,8 @@ export default function Content({ name }: ContentProps) {
   }
   const content = search ? cameras : filteredArr
   const noCameras = search !== '' && cameras.length === 0
-  const searchNotFound = search !== '' && items.length === 0
   const noContent = search === '' && items.length === 0
-  console.log(noContent)
+  console.log(!noCameras && noContent && finished)
 
   React.useEffect(() => {
     fetch()
@@ -86,7 +85,7 @@ export default function Content({ name }: ContentProps) {
             placeholder={common.input.search_placeholder}
           />
         </div>
-        {(!noCameras && noContent && finished) || searchNotFound ? (
+        {(noContent && finished) || noCameras ? (
           <ErrorPlaceholder />
         ) : (
           <InfiniteScroll
